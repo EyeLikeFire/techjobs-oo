@@ -19,7 +19,6 @@ public class JobData {
     private JobFieldData<CoreCompetency> coreCompetencies = new JobFieldData<>();
     private JobFieldData<PositionType> positionTypes = new JobFieldData<>();
 
-
     private JobData() {
         JobDataImporter.loadData(this);
     }
