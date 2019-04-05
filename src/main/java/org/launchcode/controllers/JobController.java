@@ -51,38 +51,27 @@ public class JobController {
             model.addAttribute("JobForm", jobForm);
             return "new-job";
         }
-        // this variable will be the job
-        // This line of code will use the jobData.add function to add job to the database
 
 
-
-        String name = jobForm.getName();
         // "employer" below creates a new "Employer" obj.
         // Next, using the employer ID (jobFrom.getEmployerID)...
         // ...it searches for IDs in jobData.getEmployers.
+        String name = jobForm.getName();
         Employer employer = jobData.getEmployers().findById( jobForm.getEmployerId() );
         Location location = jobData.getLocations().findById( jobForm.getLocationId() );
         PositionType positionType = jobData.getPositionTypes().findById( jobForm.getPositionTypeId() );
         CoreCompetency coreCompetency = jobData.getCoreCompetencies().findById( jobForm.getCoreCompetencyId() );
 
 
-
+        //create a new job based on form data above
         Job newJob = new Job(
                 name, employer, location, positionType, coreCompetency
         );
+        //add newly created job to jobData
         jobData.add(newJob);
 
 
-
-
-        //THIS works:
-        System.out.println("G G E T  C C O O L  S S T U F F");
-        System.out.println(jobForm.getCoreCompetencyId());
-        System.out.println(jobForm.getEmployerId());
-        System.out.println(jobForm.getName());
-
-
-        return ("redirect:?id=" + "1");
+        return ("redirect:?id=" + newJob.getId());
 
     }
 }
